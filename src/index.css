@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap');
+
+@layer base {
+  body {
+    @apply bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-300 font-sans min-h-screen;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-xl shadow-xl;
+  }
+
+  .terminal-effect {
+    @apply font-mono text-emerald-500;
+  }
+
+  .search-button {
+    @apply bg-emerald-600 hover:bg-emerald-500 text-white font-semibold 
+           py-3 px-6 rounded-lg transition-all duration-300 
+           shadow-lg shadow-emerald-900/20
+           disabled:opacity-50 disabled:cursor-not-allowed
+           disabled:bg-slate-700 disabled:shadow-none;
+  }
+
+  .result-card {
+    @apply glass-panel p-6 mb-6 transition-all duration-300;
+  }
+
+  .search-type-button {
+    @apply flex items-center space-x-2 p-3 rounded-lg transition-all duration-300
+           hover:bg-slate-800 border border-transparent
+           text-slate-400 hover:text-slate-200;
+  }
+
+  .search-type-button.active {
+    @apply bg-slate-800 border-slate-700 text-emerald-400
+           shadow-lg shadow-emerald-900/10;
+  }
+
+  .social-link {
+    @apply text-slate-400 hover:text-emerald-400 transition-colors duration-300 
+           p-2 rounded-full hover:bg-slate-800;
+  }
+
+  .scanning-line {
+    @apply absolute inset-x-0 h-0.5 bg-emerald-500/20;
+    animation: scanLine 2s ease-in-out infinite;
+  }
+
+  .scanning-effect {
+    @apply relative overflow-hidden;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scanLine {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: rgb(16 185 129); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.typewriter {
+  display: inline-block;
+  overflow: hidden;
+  border-right: 2px solid transparent;
+  white-space: nowrap;
+  animation: 
+    typewriter 2s steps(40, end),
+    blink 1s step-end infinite;
+}
+
+.loading-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.loading-dot {
+  @apply w-2 h-2 rounded-full bg-emerald-500;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.loading-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
